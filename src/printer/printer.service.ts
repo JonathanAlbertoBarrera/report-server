@@ -6,8 +6,8 @@ const fonts = {
         Roboto: {
             normal: 'fonts/RobotoSerif_120pt-Thin.ttf',
             bold: 'fonts/RobotoSerif_28pt-Bold.ttf',
-            italics: 'fonts/RobotoSerif_28pt-BlackItalic',
-            bolditalics: 'fonts/RobotoSerif_28pt-BoldItalic',
+            italics: 'fonts/RobotoSerif_28pt-BlackItalic.ttf',
+            bolditalics: 'fonts/RobotoSerif_28pt-BoldItalic.ttf',
         }
 };
 
