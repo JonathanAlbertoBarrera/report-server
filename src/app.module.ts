@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { BasicReportsModule } from './basic-reports/basic-reports.module';
+import { PrinterModule } from './printer/printer.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { BasicReportsModule } from './basic-reports/basic-reports.module';
       logging: console.log,
     }),
       BasicReportsModule,
+      PrinterModule,
   ],
 })
 export class AppModule {}

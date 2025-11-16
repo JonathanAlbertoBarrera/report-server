@@ -1,17 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Employee } from './employee.model';
+import { PrinterService } from 'src/printer/printer.service';
+import { getHelloWorldReport } from 'src/reports';
 
 @Injectable()
 export class BasicReportsService {
 
-    constructor(@InjectModel(Employee) private employeeModel: typeof Employee){}
+    constructor(@InjectModel(Employee) private employeeModel: typeof Employee, private readonly printerService:PrinterService){}
+    
 
-    async hello(){
-        return this.employeeModel.findOne({
-            where:{
-                id:1,
-            },
-        });
-    }
+        hello(){
+            const docDefinition=getHelloWorldReport({
+                name:'Alberto Barrera'
+            });
+            const doc=this.printerService.createPdf(docDefinition);
+            return doc;
+        }
 }
