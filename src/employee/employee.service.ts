@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Employee } from './employee.model';
-import { PrinterService } from 'src/printer/printer.service';
-import { getEmploymentLetterReport, getHelloWorldReport } from 'src/reports';
+import { PrinterService } from 'src/printer-PDF/printer.service';
+import { definitionHelloWorldReport, definitionLetterReport } from './reports';
 
 @Injectable()
 export class BasicReportsService {
@@ -11,15 +11,19 @@ export class BasicReportsService {
     
 
         hello(){
-            const docDefinition=getHelloWorldReport({
-                name:'Alberto Barrera'
-            });
+            const docDefinition=definitionHelloWorldReport({name:'Alberto Barrera'});
             const doc=this.printerService.createPdf(docDefinition);
             return doc;
         }
 
         employmentLetter(){
-            const docDefinition=getEmploymentLetterReport();
+            const docDefinition=definitionLetterReport();
+            const doc=this.printerService.createPdf(docDefinition);
+            return doc;
+        }
+
+        employmentLetterById(){
+            const docDefinition=definitionLetterReport();
             const doc=this.printerService.createPdf(docDefinition);
             return doc;
         }

@@ -1,5 +1,5 @@
 import type { StyleDictionary, TDocumentDefinitions } from 'pdfmake/interfaces';
-import { headerSection } from './sections/header.section';
+import { headerSection } from '../../../printer-PDF/sections/header.section';
 
 const styles: StyleDictionary = {
     title: {
@@ -25,7 +25,7 @@ const styles: StyleDictionary = {
     },
 };
 
-export const getEmploymentLetterReport = (): TDocumentDefinitions => {
+export const definitionLetterReport = (): TDocumentDefinitions => {
     const docDefinition: TDocumentDefinitions = {
         styles: styles,
         pageMargins:[40,60,40,60],

@@ -2,7 +2,7 @@ import type { Content } from "pdfmake/interfaces";
 import { DateFormatter } from "src/helpers";
 
 const logo: Content = {
-    image: 'src/assets/tucan-code-logo.png',
+    image: 'src/printer-PDF/assets/tucan-code-logo.png',
     width: 100,
     height: 100,
     alignment: 'center',

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SequelizeModule } from '@nestjs/sequelize';
-import { BasicReportsModule } from './basic-reports/basic-reports.module';
-import { PrinterModule } from './printer/printer.module';
+import { EmployeeModule } from './employee/employee.module';
+import { PrinterModule } from './printer-PDF/printer.module';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { PrinterModule } from './printer/printer.module';
       synchronize: true,
       logging: console.log,
     }),
-      BasicReportsModule,
+      EmployeeModule,
       PrinterModule,
   ],
 })
