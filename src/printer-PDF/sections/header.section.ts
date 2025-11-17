@@ -2,11 +2,11 @@ import type { Content } from "pdfmake/interfaces";
 import { DateFormatter } from "src/helpers";
 
 const logo: Content = {
-    image: 'src/printer-PDF/assets/tucan-code-logo.png',
-    width: 100,
+    image: 'src/printer-PDF/assets/Logo-utez.png',
+    width: 150,
     height: 100,
     alignment: 'center',
-    margin: [0, 0, 0, 20],
+    margin: [0, 0, 0, 100],
 }
 
 interface HeaderOptions {
@@ -22,7 +22,7 @@ export const headerSection = (options: HeaderOptions): Content => {
     const headerLogo:Content=showLogo ? logo : '';
 
     const headerDate:Content=showDate ? {
-        text:DateFormatter.getDDMMMMYYYY(new Date()),
+        text:DateFormatter.getCurrentDateFormatted(),
         alignment: 'right',
         margin: [20, 20],
     } : '';

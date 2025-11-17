@@ -26,7 +26,7 @@ export class BasicReportsController {
 
   @Get('employment-letter/:id')
   async employmentLetterID(@Res() response: Response,@Param('id') id:string){
-    const pdfDoc= this.basicReportsService.employmentLetterById();
+    const pdfDoc= await this.basicReportsService.employmentLetterById(+id);
     response.setHeader('Content-Type','application/pdf');
     pdfDoc.info.Title="PDF_PRO_JONA";
     pdfDoc.pipe(response);

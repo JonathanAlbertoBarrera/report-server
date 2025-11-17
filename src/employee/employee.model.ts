@@ -6,20 +6,20 @@ export class Employee extends Model {
   declare id: number;
 
   @Column({ type: DataType.STRING(100), allowNull: false })
-  name: string;
+  declare name: string;
 
   @Column({ type: DataType.STRING(50), allowNull: false })
-  position: string;
+  declare position: string;
 
   @Column({ type: DataType.DATE, allowNull: false })
-  start_date: Date;
+  declare start_date: Date;
 
   @Column({ type: DataType.TIME, allowNull: false })
-  work_time: string;
+  declare work_time: string;
 
   @Column({ type: DataType.INTEGER, allowNull: false })
-  hours_per_day: number;
+  declare hours_per_day: number;
 
   @Column({ type: DataType.STRING(50), allowNull: false })
-  work_schedule: string;
+  declare work_schedule: string;
 }

@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Employee } from './employee.model';
 import { PrinterService } from 'src/printer-PDF/printer.service';
-import { definitionHelloWorldReport, definitionLetterReport } from './reports';
+import { definitionHelloWorldReport, definitionLetterEmployeeByIdReport, definitionLetterReport } from './reports';
 
 @Injectable()
 export class BasicReportsService {
@@ -22,8 +22,17 @@ export class BasicReportsService {
             return doc;
         }
 
-        employmentLetterById(){
-            const docDefinition=definitionLetterReport();
+        async employmentLetterById(id:number){
+            //validar si el id es correcto
+            const employeeSearch=await this.employeeModel.findOne({
+                where:{id}
+            })
+
+            if(!employeeSearch){
+                throw new NotFoundException('Empleado no encontrado');
+            }
+
+            const docDefinition=definitionLetterEmployeeByIdReport({empleado:employeeSearch});
             const doc=this.printerService.createPdf(docDefinition);
             return doc;
         }
