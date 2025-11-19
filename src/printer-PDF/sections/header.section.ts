@@ -1,20 +1,6 @@
 import type { Content, Column } from 'pdfmake/interfaces';
 import { DateFormatter } from 'src/helpers';
 
-const logo: Content = {
-  image: 'src/printer-PDF/assets/Logo-utez.png',
-  width: 120,
-  height: 100,
-  alignment: 'left',
-  margin: [0, 0, 0, 5],
-};
-
-const date: Content = {
-  text: DateFormatter.getCurrentDateFormatted(),
-  alignment: 'right',
-  margin: [20, 40],
-};
-
 interface HeaderOptions {
   title?: string;
   subTitle?: string;
@@ -25,53 +11,57 @@ interface HeaderOptions {
 export const headerSection = (options: HeaderOptions): Content => {
   const { title, subTitle, showLogo = true, showDate = true } = options;
 
-  const headerLogo: Content = showLogo ? logo : { text: '' };
-
-  const headerSubTitle: Content = subTitle
-    ? {
-        text: subTitle,
-        alignment: 'center',
-        margin: [0, 2, 0, 0],
-        style: {
-          fontSize: 16,
-          bold: true,
-        },
-      }
-    : { text: '' };
-
-  const headerTitle: Content = title
-    ? {
+  return {
+    columns: [
+      // Columna 1 - Logo
+      {
+        width: '25%',
+        stack: showLogo ? [{
+          image: 'src/printer-PDF/assets/Logo-utez.png',
+          width: 120,
+          height: 100,
+          alignment: 'left',
+          margin: [0, 0, 0, 5],
+        }] : [{ text: '' }]
+      } as Column,
+      
+      // Columna 2 - Título + SUBTITULO
+      {
+        width: '50%',
         stack: [
           {
-            text: title,
+            text: title || '',
             alignment: 'center',
-            margin: [0, 15, 0, 0],
             style: {
               bold: true,
               fontSize: 22,
             },
+            margin: [0, 15, 0, 0],
           },
-          headerSubTitle,
+          ...(subTitle ? [{
+            text: subTitle,
+            alignment: 'center',
+            style: {
+              fontSize: 16,
+              bold: true,
+            },
+            margin: [0, 2, 0, 0],
+          }] : [])
         ],
-      }
-    : { text: '' };
-
-  const headerDate: Content = showDate ? date : { text: '' };
-
-  return {
-    columns: [
+        alignment: 'center' //  Centrar toda la columna
+      } as Column,
+      
+      // Columna 3 - Fecha
       {
         width: '25%',
-        ...(headerLogo),
-      } as Column,
-      {
-        width: '50%',
-        ...(headerTitle),
-      } as Column,
-      {
-        width: '25%',
-        ...(headerDate),
-      } as Column,
+        stack: showDate ? [{
+          text: DateFormatter.getCurrentDateFormatted(),
+          alignment: 'right',
+          margin: [0, 40, 10, 0],
+        }] : [{ text: '' }]
+      } as Column
     ],
+    // espacio entre columnas
+    columnGap: 10
   };
 };
