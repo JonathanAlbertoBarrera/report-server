@@ -2,66 +2,40 @@ import type { StyleDictionary, TDocumentDefinitions } from 'pdfmake/interfaces';
 import { headerSection } from 'src/printer-PDF/sections/header.section';
 import { Country } from '../countries.model';
 
-const styles: StyleDictionary = {
-    title: {
-        fontSize: 22,
-        bold: true,
-        alignment: 'center',
-        margin:[0,60,0,60],
-    },
-    body:{
-        alignment:'justify',
-        margin:[0,0,0,70],
-    },
-    signature:{
-        fontSize:14,
-        bold:true,
-        alignment:'left',
-    },
-    footer: {
-        fontSize: 10,
-        italics: true,
-        alignment: 'center',
-        margin:[0,0,0,20],
-    },
-};
-   
-
-interface ReportEmployeeByIdOptins{
-    countries:Country[];
+interface ReportEmployeeByIdOptins {
+    countries: Country[];
 }
 
 export const definitionAllCountriesReport = (options: ReportEmployeeByIdOptins): TDocumentDefinitions => {
-    
-    const dataCountries:Country[] = options.countries;
-    
 
-    // Crear el texto con partes en negrita
-    const contentText = [
-        'Yo, ',
-        { text: 'VARIABLE', bold: true },
-        ', en mi calidad de ',
-        { text: 'variable', bold: true },
-    ];
+    const dataCountries: Country[] = options.countries;
+
 
     const docDefinition: TDocumentDefinitions = {
-        styles: styles,
-        pageMargins: [40, 60, 40, 60],
-        header: headerSection({ showLogo: true, showDate: true }),
+        pageOrientation: 'landscape',//ORIENTACION
+        header: headerSection({ showLogo: true, showDate: true ,title:"Countries Report",subTitle:"List of all countries"}),//HEADER PERSONALIZADO
+        
+        //MARGENES RESPECTO AL CONTENT. LEFT, TOP, RIGHT AND BOTTOM
+        //LO QUE TIENE TOP DEBE CONSIDERARSE SEGUN TAMAÑO DEL HEADER
+        //LO QUE TIENE BOTTOM DEBE CONSIDERARSE SEGUN EL TAMAÑO DEL BOTTOM
+        pageMargins: [40, 110, 40, 60],
+        
         content: [
             {
-                text: 'REPORTE DE PAISES',
-                style: 'title',
-            },
-            {
-                text: contentText,
-                style: 'body'
-            },
-             {
-                text: dataCountries[0].name,
-                style: 'body'
-            },
+                layout: 'headerLineOnly',
+                table: {
+                    headerRows: 1,
+                    widths: ['*', 'auto', 100, '*'],
+
+                    body: [
+                        ['First', 'Second', 'Third', 'The last one'],
+                        ['Value 1', 'Value 2', 'Value 3', 'Value 4'],
+                        [{ text: 'Bold value', bold: true }, 'Val 2', 'Val 3', 'Val 4']
+                    ]
+                }
+            }
         ],
+
         footer: {
             text: 'Footer countries',
             style: 'footer',
