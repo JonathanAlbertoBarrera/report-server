@@ -3,6 +3,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { EmployeeModule } from './employee/employee.module';
 import { PrinterModule } from './printer-PDF/printer.module';
 import { CountriesModule } from './countries/countries.module';
+import { StoreModule } from './store/store.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { CountriesModule } from './countries/countries.module';
       EmployeeModule,
       PrinterModule,
       CountriesModule,
+      StoreModule,
   ],
 })
 export class AppModule {}
