@@ -33,13 +33,22 @@
 3. Abre el archivo `queries/01-employees.sql` y copia su contenido
 4. Pega el SQL en el Query Tool y ejecútalo (F5 o botón play)
 
-## Ejemplo de Reporte Generado
 
-<img src="./resultados/CONSTANCIA1IMG.png" alt="Ejemplo de Constancia de Empleo" width="600" />
+## Ejemplos de Reportes Generados
+
+Puedes visualizar los reportes PDF generados directamente en GitHub:
+
+| Reporte                              | Descripción                        | Enlace                                                        |
+|--------------------------------------|------------------------------------|---------------------------------------------------------------|
+| Constancia de Empleo                 | Ejemplo de constancia por empleado | [Ver PDF](./resultados/REPORTE1_CONSTANCIA.pdf)               |
+| Tabla de Países                      | Ejemplo de tabla de países         | [Ver PDF](./resultados/REPORTE2_TABLA%20PAISES.pdf)           |
+
+Haz clic en los enlaces para ver los reportes generados.
 
 ## Endpoints disponibles
 
 - `GET /basic-reports/employment-letter/:id` - Constancia de empleo por ID
+- `GET /countries/` - PDF paginado con tabla de paises del mundo
 
 ## Notas importantes
 

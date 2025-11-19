@@ -28,13 +28,13 @@ export const definitionAllCountriesReport = (
 
     content: [
       {
-        layout: 'lightHorizontalLines',
+        layout: 'customLayout01',
         table: {
           headerRows: 1,
           widths: [50, 50, 50, '*', 'auto', '*'],
 
           body: [
-            ['ID', 'ISO2', 'ISO3', 'Name', 'Continent', 'Local Name'],
+            [{text:'ID',color:'white',bold:true}, {text:'ISO2',color:'white',bold:true},{text:'ISO3',color:'white',bold:true}, {text:'Name',color:'white',bold:true},{text:'Name',color:'Continent',bold:true} ,{text:'Local Name',color:'Continent',bold:true}],
             ...dataCountries.map((country) => [
               country.id.toString(),
               country.iso2,
