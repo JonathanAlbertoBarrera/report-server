@@ -61,15 +61,15 @@ export const headerSection = (options: HeaderOptions): Content => {
   return {
     columns: [
       {
-        width: 'auto',
+        width: '25%',
         ...(headerLogo),
       } as Column,
       {
-        width: '*',
+        width: '50%',
         ...(headerTitle),
       } as Column,
       {
-        width: 'auto',
+        width: '25%',
         ...(headerDate),
       } as Column,
     ],
