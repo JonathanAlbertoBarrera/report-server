@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrinterService } from 'src/printer-PDF/printer.service';
-import { definitionSvgBasicReport } from './reports';
+import { definitionStatisticsReport, definitionSvgBasicReport } from './reports';
 import { InjectModel } from '@nestjs/sequelize';
 import { Customers } from './models/customers.model';
+import { Sequelize } from 'sequelize';
 
 @Injectable()
 export class StoreService {
@@ -15,11 +16,33 @@ export class StoreService {
         return doc;
     }
 
-    async getStatistics(){
-
-        const topCountries=await this.customerModel.findAll();
-        const docDefinition=await definitionSvgBasicReport();
-        const doc=this.printerService.createPdf(docDefinition);
+    async getStatistics() {
+        const sequelize = this.customerModel.sequelize;
+        
+        if (!sequelize) {
+            throw new Error('Database connection not available');
+        }
+    
+        const topCountries = await this.customerModel.findAll({
+            attributes: [
+                'country',
+                [sequelize.fn('COUNT', sequelize.col('country')), 'count']
+            ],
+            group: ['country'],
+            order: [[sequelize.literal('count'), 'DESC']],
+            limit: 10,
+            raw: true
+        });
+    
+        console.log('Top countries:', topCountries);
+        
+        const ListCountriesReport = topCountries.map((tc: any) => ({
+            country: tc.country || 'Unknown',
+            customers: Number(tc.count) || 0
+        }));
+    
+        const docDefinition = await definitionStatisticsReport({topCountries: ListCountriesReport});
+        const doc = this.printerService.createPdf(docDefinition);
         return doc;
     }
 }
