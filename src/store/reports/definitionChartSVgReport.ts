@@ -1,6 +1,7 @@
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 import fs from 'fs';
-import * as Utils from '../../helpers/chart-utils';
+import * as Utils from 'src/printer-PDF/charts/chart-utils';
+
 
 const svgContent = fs.readFileSync('src/printer-PDF/assets/ford.svg', 'utf8');
 

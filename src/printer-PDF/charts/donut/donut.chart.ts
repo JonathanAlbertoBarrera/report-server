@@ -1,20 +1,15 @@
-import * as Utils from 'src/helpers/chart-utils';
-import { PositionLegend } from './chart-types';
-
-interface DonutEntry {
-  label: string;
-  value: number;
-}
-
-interface DonutOptions {
-    ListEntries: DonutEntry[];
-    positionLegend?: PositionLegend;
-    titleChart?:string | null;
-}
+import { PositionLegend } from '../chart-types';
+import { DonutOptions } from './types-donut';
+import * as Utils from '../chart-utils';
 
 export const generateDonutChart = async (options: DonutOptions): Promise<string> => {
   //obtener ListEntries que es una lista de DonutEntry[]
   const ListEntries = options.ListEntries;
+
+  //CONFIGURACION DEL GRAFICO DE CHARTJS
+  const positionLegendReceived = options.positionLegend || PositionLegend.RIGHT;
+  const title=options.titleChart || null;
+  const showTitle= title ? true : false;
 
   //DATA CON LA CUAL TRABAJARA LA GRAFICA
   const data = {
@@ -22,15 +17,10 @@ export const generateDonutChart = async (options: DonutOptions): Promise<string>
     datasets: [
       {
         data: ListEntries.map((DonutEntry) => DonutEntry.value),
-        //backgroundColor: Object.values(Utils.CHART_COLORS),
+        backgroundColor: Object.values(Utils.CHART_COLORS),
       },
     ],
   };
-
-  //CONFIGURACION DEL GRAFICO DE CHARTJS
-  const positionLegendReceived = options.positionLegend || PositionLegend.RIGHT;
-  const title=options.titleChart || null;
-  const showTitle= title ? true : false;
 
   const config = {
     type: 'doughnut',

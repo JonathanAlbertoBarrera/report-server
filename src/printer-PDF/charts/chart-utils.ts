@@ -6,10 +6,7 @@ interface ChartOptions {
   width?: number;
 }
 
-export const chartJsToImage = async (
-  chartConfig: unknown,
-  options: ChartOptions = {},
-) => {
+export const chartJsToImage = async (chartConfig: unknown, options: ChartOptions = {},) => {
   const params = new URLSearchParams();
 
   if (options.height) params.append('height', options.height.toString());
