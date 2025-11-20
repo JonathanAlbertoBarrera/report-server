@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { PrinterService } from 'src/printer-PDF/printer.service';
 import { Country } from './countries.model';
-import { definitionAllCountriesReport } from './reports';
 import { Op } from 'sequelize';
+import { definitionAllCountriesReport } from 'src/printer-PDF/reports';
 
 @Injectable()
 export class CountriesService {

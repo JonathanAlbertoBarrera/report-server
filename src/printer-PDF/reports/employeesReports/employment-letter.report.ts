@@ -1,5 +1,5 @@
 import type { StyleDictionary, TDocumentDefinitions } from 'pdfmake/interfaces';
-import { headerSection } from '../../../printer-PDF/sections/header.section';
+import { headerSection } from '../../sections/header.section';
 
 const styles: StyleDictionary = {
     title: {

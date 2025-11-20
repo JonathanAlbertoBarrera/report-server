@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { PrinterService } from 'src/printer-PDF/printer.service';
-import { definitionStatisticsReport, definitionSvgBasicReport } from './reports';
 import { InjectModel } from '@nestjs/sequelize';
 import { Customers } from './models/customers.model';
 import { PositionLegend } from 'src/printer-PDF/charts';
+import { definitionStatisticsReport, definitionSvgBasicReport } from 'src/printer-PDF/reports';
 
 @Injectable()
 export class StoreService {

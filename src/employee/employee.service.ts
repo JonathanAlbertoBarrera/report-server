@@ -2,7 +2,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Employee } from './employee.model';
 import { PrinterService } from 'src/printer-PDF/printer.service';
-import { definitionHelloWorldReport, definitionLetterEmployeeByIdReport, definitionLetterReport } from './reports';
+import { definitionHelloWorldReport, definitionLetterEmployeeByIdReport, definitionLetterReport } from 'src/printer-PDF/reports';
+
 
 @Injectable()
 export class BasicReportsService {

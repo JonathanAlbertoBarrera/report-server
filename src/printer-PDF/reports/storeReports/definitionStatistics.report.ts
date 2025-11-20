@@ -38,6 +38,7 @@ export const definitionStatisticsReport = async (options: ReportOptions): Promis
 
     const docDefinition: TDocumentDefinitions = {
         content: [
+            
             {
                 stack: [
                     {

@@ -1,6 +1,6 @@
 import type { TDocumentDefinitions } from 'pdfmake/interfaces';
 import { headerSection } from 'src/printer-PDF/sections/header.section';
-import { Country } from '../countries.model';
+import { Country } from '../../../countries/countries.model';
 import { footerSection } from 'src/printer-PDF/sections/footer.section';
 
 interface ReportEmployeeByIdOptins {

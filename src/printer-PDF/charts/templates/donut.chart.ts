@@ -1,6 +1,16 @@
 import { PositionLegend } from '../chart-types';
-import { DonutOptions } from './types-donut';
 import * as Utils from '../chart-utils';
+
+export interface DonutEntry {
+  label: string;
+  value: number;
+}
+
+export interface DonutOptions {
+  ListEntries: DonutEntry[];
+  positionLegend?: PositionLegend;
+  titleChart?: string | null;
+}
 
 export const generateDonutChart = async (options: DonutOptions): Promise<string> => {
   //obtener ListEntries que es una lista de DonutEntry[]
