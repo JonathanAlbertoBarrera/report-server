@@ -3,7 +3,7 @@ import { PrinterService } from 'src/printer-PDF/printer.service';
 import { definitionStatisticsReport, definitionSvgBasicReport } from './reports';
 import { InjectModel } from '@nestjs/sequelize';
 import { Customers } from './models/customers.model';
-import { Sequelize } from 'sequelize';
+import { PositionLegend } from 'src/printer-PDF/charts';
 
 @Injectable()
 export class StoreService {
@@ -33,15 +33,14 @@ export class StoreService {
             limit: 10,
             raw: true
         });
-    
-        console.log('Top countries:', topCountries);
         
         const ListCountriesReport = topCountries.map((tc: any) => ({
             country: tc.country || 'Unknown',
             customers: Number(tc.count) || 0
         }));
     
-        const docDefinition = await definitionStatisticsReport({topCountries: ListCountriesReport});
+        //const docDefinition = await definitionStatisticsReport({entriesChart: ListCountriesReport});
+        const docDefinition = await definitionStatisticsReport({entriesChart: ListCountriesReport,titleReport:'Top 10 Countries by Customers',subTitleReport:'Generated Statistics Report',titleChart:'Customers by Country',positionLegendChart:PositionLegend.BOTTOM});
         const doc = this.printerService.createPdf(docDefinition);
         return doc;
     }
